@@ -1,0 +1,35 @@
+{
+    "name": "socket-app",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "async": "^3.2.0",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "buffer": "^6.0.3",
+        "cheerio": "^1.0.0-rc.5",
+        "connect-multiparty": "^2.2.0",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "formidable": "^1.2.2",
+        "fs": "0.0.1-security",
+        "jsonwebtoken": "^8.5.1",
+        "moment": "^2.26.0",
+        "multer": "^1.4.2",
+        "multipart": "^0.1.5",
+        "mysql2": "^2.2.5",
+        "node-fetch": "^2.6.1",
+        "nodemailer": "^6.4.17",
+        "nodemon": "^2.0.6",
+        "sequelize": "^6.3.5",
+        "socket.io": "^2.3.0"
+    }
+}

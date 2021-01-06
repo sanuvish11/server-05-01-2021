@@ -8,6 +8,7 @@ const Chat = db.chat;
 const WorkAreaNotes = db.workareanotes;
 const Chat_schedule = db.chat_schedule;
 const RoomParticipant = db.roomparticipant;
+const Strong = db.strong;
 const Bible = db.bible;
 const Country = db.country;
 const State = db.state;
@@ -803,7 +804,19 @@ exports.GetAllBible = (req, res) => {
     })
 }
 
+exports.GetAllStrong = (req, res) => {
+    Strong.findAll({
+        where: {
+            verse: {
+                [Op.like]: req.body.verse
+            },
+        }
 
+    })
+        .then(data => {
+            res.send(data)
+            // res.json(data); 
+        }).catch(err => res.send(err))
+}
 
-// mycodeends
 

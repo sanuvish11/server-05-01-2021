@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER
         },
         CHAT_STATUS: {
-            type: Sequelize.STRING
+            type: Sequelize.INTEGER
         },
         CHAT_COMMENT: {
 

@@ -37,6 +37,7 @@ db.city = require("../models/city.model")(sequelize, Sequelize);
 db.file = require("../models/file.model")(sequelize, Sequelize);
 db.workareanotes = require("../models/WorkAreaNotes.model")(sequelize, Sequelize);
 db.bible = require("../models/Bible.Model")(sequelize, Sequelize);
+db.strong = require("../models/Strong.Model")(sequelize, Sequelize);
 db.role.belongsToMany(db.user, {
     through: "user_roles",
     foreignKey: "roleId",

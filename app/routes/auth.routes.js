@@ -56,4 +56,6 @@ module.exports = function(app) {
     app.get("/api/auth/GetAllActiveChats", controller.GetAllActiveChats);
     app.get("/api/auth/GetAllChats", controller.GetAllChats);
     app.post("/api/auth/GetAllBible", controller.GetAllBible);
+    app.post("/api/auth/GetAllStrong", controller.GetAllStrong);
+    
 };

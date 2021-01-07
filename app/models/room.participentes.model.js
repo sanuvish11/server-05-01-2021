@@ -29,6 +29,9 @@ module.exports = (sequelize, Sequelize) => {
         LAST_MESSAGE: {
             type: Sequelize.STRING
         },
+        FLAG_COMMENT:{
+            type : Sequelize.STRING
+        },
         CREATED_BY: {
             type: Sequelize.STRING
         },

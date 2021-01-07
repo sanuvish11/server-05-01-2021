@@ -4,8 +4,8 @@ let upload = require('../config/multer.config.js');
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart({ uploadDir: './uploads' });
 
-module.exports = function(app) {
-    app.use(function(req, res, next) {
+module.exports = function (app) {
+    app.use(function (req, res, next) {
         res.header(
             "Access-Control-Allow-Headers",
             "x-access-token, Origin, Content-Type, Accept"
@@ -14,7 +14,7 @@ module.exports = function(app) {
     });
 
     app.post("/api/auth/signup", [verifySignUp.checkDuplicateUsernameOrEmail,
-        verifySignUp.checkRolesExisted
+    verifySignUp.checkRolesExisted
     ], controller.signup);
     app.post("/api/auth/search", controller.search);
     app.post("/api/auth/signin", controller.signin);
@@ -48,14 +48,19 @@ module.exports = function(app) {
 
     app.post('/api/auth/workareanote', controller.workareanote);
     app.post('/api/auth/getworkareanote', controller.getworkareanotes);
+    
     app.delete('/api/auth/deteteworkareanotes/:id', controller.deleteworkareanotes);
     app.put('/api/auth/updateworkareanote/:id', controller.updateworkareanote);
 
     // mycode
-    app.post('/api/auth/updateChatStatus/:id', controller.updateChatStatus);
+    app.post('/api/auth/updateChatStatus/:id1/:id2', controller.updateChatStatus);
+
     app.get("/api/auth/GetAllActiveChats", controller.GetAllActiveChats);
     app.get("/api/auth/GetAllChats", controller.GetAllChats);
+
     app.post("/api/auth/GetAllBible", controller.GetAllBible);
     app.post("/api/auth/GetAllStrong", controller.GetAllStrong);
-    
+
+    app.post("/api/auth/Strongcode", controller.GetAllStrongcode);
+    app.post("/api/auth/closeChat", controller.closeChat);
 };

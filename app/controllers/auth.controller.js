@@ -748,20 +748,35 @@ exports.listAllFiles = (req, res) => {
 }
 
 // mycodestarts
-
 exports.updateChatStatus = (req, res) => {
-    const chatID = req.param("id");
+    const chatID = req.param("id1");
+    const prevStatus = req.param("id2");
+    console.log(chatID , prevStatus)
+   if(prevStatus == 0){
     RoomParticipant.update({ CHAT_STATUS: 1 }, {
         where: { id: chatID }
-    })
-        .then(num => {
+    }).then(num => {
 
-            res.send("Status updated successfully")
+            res.send("Chat is now live")
         }).catch(err => {
             res.status(500).send({
                 message: "Error updating username with id=" + username
             });
         });
+   };
+   if(prevStatus == 2){
+    const RoomID = req.param("id1");
+
+    RoomParticipant.update({ CHAT_STATUS: 0 }, {
+        where: { ROOM_ID: RoomID }
+    }).then(num => {
+            res.send("1")
+        }).catch(err => {
+            res.status(500).send({
+                status : 0
+            });
+        });
+   }
 
 }
 
@@ -805,6 +820,42 @@ exports.GetAllBible = (req, res) => {
 }
 
 exports.GetAllStrong = (req, res) => {
+  let  results=[];
+    let verse=[];
+    
+    Strong.findAll({
+        where: {
+            code: {
+                [Op.like]: req.body.code
+            },
+        }
+    })
+        .then(data => {
+       
+            verse = data;
+            verse.forEach((element) => {
+
+                Bible.findAll({
+                    where: {
+                        verse: {
+                            [Op.like]: element.verse
+                        }
+                    }
+                }).then(message => {
+                    results.push(message)
+                   
+                    if(verse.length==results.length){
+                        res.send(Array.prototype.concat.apply([], results))
+
+                    }                  
+                })
+            });
+           
+            console.log(results.length)
+
+        }).catch(err => res.send(err))
+}
+exports.GetAllStrongcode = (req, res) => {
     Strong.findAll({
         where: {
             verse: {
@@ -820,3 +871,21 @@ exports.GetAllStrong = (req, res) => {
 }
 
 
+exports.closeChat = (req,res) => {
+    const RoomID = req.body.ROOM_ID;
+    const chatStatus = req.body.CHAT_STATUS;
+    const chatComment = req.body.CHAT_COMMENT;
+    const isFlagged = req.body.IS_FLAG;
+    const flagComment = req.body.FLAG_COMMENT;
+
+    RoomParticipant.update({
+        CHAT_STATUS : chatStatus , CHAT_COMMENT : chatComment , IS_FLAG : isFlagged , FLAG_COMMENT : flagComment
+    },{
+        where : {
+            ROOM_ID : RoomID
+        }
+    }). then(data => {
+        res.send("1");
+    })
+
+}
